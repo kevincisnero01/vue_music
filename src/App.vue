@@ -1,23 +1,28 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <h1>Bienvenido a RadioMusic</h1>
+    <h1>VueMusic</h1>
     <ul>
-      <li v-for="artist in artists">
+      <artist v-for="artist in artists" v-bind:artist="artist" v-bind:key="artist.mbid">
         {{ artist.name }}
-      </li>
+      </artist>
     </ul>
   </div>
 </template>
 
 <script>
+import Artist from './components/Artist.vue'
 import getArtists from './api'
+
 export default {
   name: 'app',
   data () {
     return {
       artists: []
     }
+  },
+  components: {
+    Artist: Artist
   },
   mounted: function () {
     const self = this
