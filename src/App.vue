@@ -1,22 +1,32 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
+    <h1>Bienvenido a RadioMusic</h1>
     <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
+      <li v-for="artist in artists">
+        {{ artist.name }}
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
+import getArtists from './api'
 export default {
   name: 'app',
   data () {
     return {
-      msg: 'Bienvenido a RadioMusic'
+      artists: []
     }
+  },
+  mounted: function () {
+    const self = this
+    getArtists()
+      .then(function (artists){
+        self.artists = artists
+      })
   }
+
 }
 </script>
 
